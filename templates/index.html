@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header class="header">
+        <a href="#" class="logo">Diary Product Shop</a>
+          <nav class="nav-items">
+
+            <a class="active" href="#">{{user.first_name}} {{user.last_name}}</a>
+
+            <a class="active" href="{% url 'home' %}">Home</a>
+            <a href="{% url 'register' %}">Register</a>
+               <a href="{% url 'service' %}">service</a>
+            <a href="{% url 'shopping' %}">shopping</a>
+           {% if user.is_authenticated %}
+            <a href="logout">Logout</a>
+            {% else %}
+            <a href="login">Login</a>
+            {% endif %}
+
+
+
+          </nav>
+</header>
+<style>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#2691d9;
+
+}
+
+.header .logo {
+  font-size: 35px;
+  font-family: 'Sriracha', cursive;
+  color: #000;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ##2691d9;
+  margin-right: 20px;
+}
+
+.nav-items a {
+  text-decoration: none;
+  color: #000;
+  padding: 35px 20px;
+}</style>
+ <div>{% block content %}{% endblock  %}</div>
+</body>
+</html>

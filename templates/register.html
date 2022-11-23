@@ -1,0 +1,259 @@
+{% load static %}
+<html>
+  <head>
+    <title>Registration form</title>
+    <style>
+    body{
+      font-family: Calibri, Helvetica, sans-serif;
+      background-image:url("{% static 'images/milk003.jpg' %}");
+      background-repeat:no-repeat;
+      background-size:cover;
+
+    }
+    .container {
+    border-radius:15px;
+        padding: 50px;
+      background-color: lightblue;
+    }
+
+    input[type=text], input[type=password], textarea {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: orange;
+      outline: none;
+    }
+     div {
+                padding: 10px 0;
+             }
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+    .registerbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 220px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+    .registerbtn:hover {
+      opacity: 1;
+    }
+
+    </style>
+
+  </head>
+  <body>
+  <center><h1> Registration Form</h1>
+
+    <form action="register" method ="post" autocomplete="off">
+      {% csrf_token %}
+      <table border="0">
+        <tr>
+        <td>Firstname</td>
+        <td><input type="text" name="first_name" placeholder= "Firstname" size="15" required />
+        </td>
+        </tr>
+
+        <td>lastName:</td>
+        <td><input type="text" name="last_name" placeholder="Lastname" size="15"required /> <br></td>
+        </tr>
+
+        </tr>
+        <tr>
+        <td>username :</td>
+         <td><input type="text" name="username" placeholder="username"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter  and at least 8 or more characters" required> <br></td>
+        </tr>
+        <tr>
+        <td>Email</td>
+        <td><input type="email" placeholder="Enter Email" name="email" required> </td>
+        </tr><tr>
+        <td>Password:</td>
+        <td><input type="password" id="pass" placeholder="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, at least 8 or more characters" required>
+    </td>
+        </tr>
+        <tr>
+        <td>Confirm Password:</td>
+        <td><input type="password" id="repass" placeholder="confirm password" name="cpassword"></td>
+        </tr>
+        <tr>
+          <td colspan="2"><center><button id="myBtn" button type="submit" class="registerbtn" >Register</button></center></td>
+
+
+<script>
+var input = document.getElementById("myInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("myBtn").click();
+  }
+});
+</script>
+        </tr>
+      </table>
+    </form></center>
+
+<!--<script>-->
+<!--var myInput = document.getElementById("psw");-->
+<!--var letter = document.getElementById("letter");-->
+<!--var capital = document.getElementById("capital");-->
+<!--var number = document.getElementById("number");-->
+<!--var length = document.getElementById("length");-->
+
+<!--// When the user clicks on the password field, show the message box-->
+<!--myInput.onfocus = function() {-->
+<!--  document.getElementById("message").style.display = "block";-->
+<!--}-->
+
+<!--// When the user clicks outside of the password field, hide the message box-->
+<!--myInput.onblur = function() {-->
+<!--  document.getElementById("message").style.display = "none";-->
+<!--}-->
+
+<!--// When the user starts to type something inside the password field-->
+<!--myInput.onkeyup = function() {-->
+<!--  // Validate lowercase letters-->
+<!--  var lowerCaseLetters = /[a-z]/g;-->
+<!--  if(myInput.value.match(lowerCaseLetters)) {-->
+<!--    letter.classList.remove("invalid");-->
+<!--    letter.classList.add("valid");-->
+<!--  } else {-->
+<!--    letter.classList.remove("valid");-->
+<!--    letter.classList.add("invalid");-->
+<!--  }-->
+
+<!--  // Validate capital letters-->
+<!--  var upperCaseLetters = /[A-Z]/g;-->
+<!--  if(myInput.value.match(upperCaseLetters)) {-->
+<!--    capital.classList.remove("invalid");-->
+<!--    capital.classList.add("valid");-->
+<!--  } else {-->
+<!--    capital.classList.remove("valid");-->
+<!--    capital.classList.add("invalid");-->
+<!--  }-->
+
+<!--  // Validate numbers-->
+<!--  var numbers = /[0-9]/g;-->
+<!--  if(myInput.value.match(numbers)) {-->
+<!--    number.classList.remove("invalid");-->
+<!--    number.classList.add("valid");-->
+<!--  } else {-->
+<!--    number.classList.remove("valid");-->
+<!--    number.classList.add("invalid");-->
+<!--  }-->
+
+<!--  // Validate length-->
+<!--  if(myInput.value.length >= 8) {-->
+<!--    length.classList.remove("invalid");-->
+<!--    length.classList.add("valid");-->
+<!--  } else {-->
+<!--    length.classList.remove("valid");-->
+<!--    length.classList.add("invalid");-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+
+  </body>
+
+<script type="text/javascript">
+    function regvalidate() {
+        var first_name = document.getElementById('first_name').value;
+        var last_name = document.getElementById('last_name').value;
+        var email = document.getElementById('email').value;
+        var pwd1 = document.getElementById('pwd1').value;
+        var pwd2 = document.getElementById('pwd2').value;
+
+
+        const isPasswordSecure = (password) => {
+            const re = new RegExp(
+                "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+            );
+            return re.test(password);
+
+        };
+
+        const isEmailValid = (email) => {
+            const re =
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        };
+
+
+        console.log(first_name);
+        if (first_name == "") {
+            document.getElementById('log-first').textContent = "Please enter your first name";
+            document.getElementById('log-first').style.border = "1px solid red";
+            document.getElementById("log-first").style.color = "red";
+
+            return false;
+        } else if (last_name == "") {
+            document.getElementById('log-last').textContent = "Please enter your last name";
+            document.getElementById('log-last').style.border = "1px solid red";
+            document.getElementById("log-last").style.color = "red";
+
+
+            return false;
+        } else if (email == "") {
+            document.getElementById('log-email').textContent = "Please enter your email";
+            document.getElementById('log-email').style.border = "1px solid red";
+            document.getElementById("log-email").style.color = "red";
+
+
+            return false;
+
+        } else if (!isEmailValid(email)) {
+            document.getElementById('log-email').textContent =
+                "enter a valid email";
+            document.getElementById('log-email').style.color = "red";
+            document.getElementById("log-email").style.color = "red";
+
+            return false;
+        } else if (password == "") {
+            document.getElementById('log-passwd').textContent = "Please enter your password";
+            document.getElementById('log-passwd').style.border = "1px solid red";
+            document.getElementById("log-passwd").style.color = "red";
+
+            return false;
+
+            return false;
+        } else if (!isPasswordSecure(password)) {
+            document.getElementById('log-passwd').textContent =
+                "Password must has at least 8 characters that include at least 1 lowercase character, 1 uppercase characters, 1 number, and 1 special character in (!@#$%^&*)";
+            document.getElementById('log-passwd').style.border = "1px solid red";
+            document.getElementById("log-passwd").style.color = "red";
+
+            return false;
+
+
+        } else if (pw2 == "") {
+            document.getElementById('log-confirm').textContent = "Please enter your confirm password";
+            document.getElementById('log-confirm').style.border = "1px solid red";
+            document.getElementById("log-confirm").style.color = "red";
+
+
+            return false;
+        } else if (pwd1 != pwd2) {
+            document.getElementById('log-confirm').textContent = "Password does not match";
+            document.getElementById('log-confirm').style.border = "1px solid red";
+            document.getElementById("log-confirm").style.color = "red";
+
+            return false;
+        } else {
+            return true;
+        }
+
+        return true;
+
+    }
+</script>
+</html>
